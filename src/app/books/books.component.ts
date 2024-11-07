@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { BookListComponent } from "./components/book-list.component";
-import { BookService } from './services/book.service';
+import { BookStore } from './services/book.store';
 
 @Component({
   selector: 'app-books',
@@ -10,12 +9,11 @@ import { BookService } from './services/book.service';
   imports: [BookListComponent],
   template: `
     <div>Books</div>
-    <app-book-list [books]="books()" />]
+    <app-book-list />
         
   `,
   styles: ``,
 })
 export class BooksComponent {
-  bookService = inject(BookService);
-  books = toSignal(this.bookService.getBooks());
+  store = inject(BookStore);
 }
